@@ -106,32 +106,32 @@
         </div>
     </div>
     <?php
-    //klik tombol login
-    if (isset($_POST["LOGIN"])) {
-        $username = $_POST["NAMA"];
-        $password = $_POST["PASSWORD"];
-        //lakukan pengecekan akun di table user
-        $ambil = $connect->query("SELECT*FROM user
-                where NAMA='$username' AND PASSWORD='$password'");
+        //klik tombol login
+        if (isset($_POST["LOGIN"])) {
+            $username = $_POST["NAMA"];
+            $password = $_POST["PASSWORD"];
+            //lakukan pengecekan akun di table user
+            $ambil = $connect->query("SELECT*FROM user
+                    where NAMA='$username' AND PASSWORD='$password'");
 
-        //menghitung akun yg terpanggil
-        $akunyangcocok = $ambil->num_rows;
+            //menghitung akun yg terpanggil
+            $akunyangcocok = $ambil->num_rows;
 
-        //jika 1 akun yg cocok maka akan login
-        if ($akunyangcocok == 1) {
-            //anda sudah login
-            //dapatkan akun dlm bentuk array
-            $akun = $ambil->fetch_assoc();
-            //simpan disession daftar user
-            $_SESSION["user"] = $akun;
-            echo "<script>alert('Halo Selamat datang $username'); </script>";
-            echo "<script>location='index.php';</script>";
-        } else {
-            //anda gagal login
-            echo "<script>alert('Anda gagal login, periksa username atau password anda'); </script>";
-            echo "<script>location='loginAdmin.php';</script>";
+            //jika 1 akun yg cocok maka akan login
+            if ($akunyangcocok == 1) {
+                //anda sudah login
+                //dapatkan akun dlm bentuk array
+                $akun = $ambil->fetch_assoc();
+                //simpan disession daftar user
+                $_SESSION["user"] = $akun;
+                echo "<script>alert('Halo Selamat datang $username'); </script>";
+                echo "<script>location='index.php';</script>";
+            } else {
+                //anda gagal login
+                echo "<script>alert('Anda gagal login, periksa username atau password anda'); </script>";
+                echo "<script>location='loginAdmin.php';</script>";
+            }
         }
-    }
     ?>
 
     <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
@@ -148,5 +148,4 @@
         }, 3000);
     </script>
 </body>
-
 </html>
